@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -10,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,33 +23,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const fileValidator = (acceptedTypes: string[]) => (file: unknown) => {
-  if (file === undefined) {
-    throw new Error(`No file has been uploaded.`);
-  }
-  const fileType = (file as File).type;
-  if (!acceptedTypes.includes(fileType)) {
-    throw new Error(
-      `Invalid file type. Only ${acceptedTypes.join(", ")} files are allowed.`
-    );
-  }
-  return file as File;
-};
-
-const csvOrXlsxFile = z.custom<File>((file) => {
-  return fileValidator([
-    "text/csv",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  ])(file);
-});
-
-const imageFile = z.custom<File>((file) => {
-  return fileValidator(["image/jpeg", "image/png"])(file);
-});
-
-const pdfFile = z.custom<File>((file) => {
-  return fileValidator(["application/pdf"])(file);
-});
+const ACCEPTED_EVENT_BANNER_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+const ACCEPTED_GUEST_LIST_TYPES = [
+  "text/csv",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+];
+const ACCEPTED_CERTIFICATE_TEMPLATE_TYPES = ["application/pdf"];
 
 const formSchema = z.object({
   eventName: z
@@ -69,19 +46,39 @@ const formSchema = z.object({
   eventDate: z.date({
     required_error: "An event date is required.",
   }),
-  guestList: csvOrXlsxFile,
-  eventBanner: imageFile,
-  certificateTemplate: pdfFile,
+  guestList: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_GUEST_LIST_TYPES.includes(file?.type),
+      "Only .csv, and .xlsx file types are supported."
+    ),
+  eventBanner: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_EVENT_BANNER_TYPES.includes(file?.type),
+      "Only .jpeg, .jpg, and .png file types are supported."
+    ),
+  certificateTemplate: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_CERTIFICATE_TEMPLATE_TYPES.includes(file?.type),
+      "Only .pdf file types are supported."
+    ),
 });
+
+export type FormType = z.infer<typeof formSchema>;
 
 export function EventForm() {
   // Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
   });
 
+  const { formState } = form; // Destructure from form the form state which tells us if form is valid or not.
+
   // Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormType) {
     console.log(values);
   }
 
@@ -89,6 +86,7 @@ export function EventForm() {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
       form.setValue("guestList", file); // Set the file as the value of guestList field
+      form.trigger("guestList");
     }
   };
 
@@ -96,6 +94,7 @@ export function EventForm() {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
       form.setValue("eventBanner", file); // Set the file as the value of eventBanner field
+      form.trigger("eventBanner");
     }
   };
 
@@ -105,6 +104,7 @@ export function EventForm() {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
       form.setValue("certificateTemplate", file); // Set the file as the value of eventBanner field
+      form.trigger("certificateTemplate");
     }
   };
 
@@ -185,11 +185,7 @@ export function EventForm() {
             <FormItem>
               <FormLabel>Event Banner</FormLabel>
               <FormControl>
-                <Input
-                  type="file"
-                  accept=".jpg,.png"
-                  onChange={handleEventBanner}
-                />
+                <Input type="file" onChange={handleEventBanner} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -202,11 +198,7 @@ export function EventForm() {
             <FormItem>
               <FormLabel>Guest List</FormLabel>
               <FormControl>
-                <Input
-                  type="file"
-                  accept=".csv,.xlsx"
-                  onChange={handleGuestList}
-                />
+                <Input type="file" onChange={handleGuestList} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -214,22 +206,18 @@ export function EventForm() {
         />
         <FormField
           control={form.control}
-          name="eventBanner"
+          name="certificateTemplate"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Certificate Template</FormLabel>
               <FormControl>
-                <Input
-                  type="file"
-                  accept=".pdf"
-                  onChange={handleCertificateTemplate}
-                />
+                <Input type="file" onChange={handleCertificateTemplate} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="ml-auto" type="submit">
+        <Button type="submit" disabled={!formState.isValid}>
           Submit
         </Button>
       </form>
