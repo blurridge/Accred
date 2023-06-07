@@ -1,5 +1,5 @@
-import { Event, columns } from "./columns";
-import { DataTable } from "./data-table";
+import { DataTable } from "@/components/DataTable";
+import { Event, columns } from "@/components/ui/columns";
 import { Timestamp } from "firebase/firestore";
 
 async function getData(): Promise<Event[]> {

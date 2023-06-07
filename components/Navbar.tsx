@@ -47,7 +47,7 @@ const Navbar = () => {
         </NavigationMenu>
       </div>
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarImage src="https://github.com/blurridge.png" alt="@blurridge" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
     </nav>
