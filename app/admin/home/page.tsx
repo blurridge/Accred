@@ -228,7 +228,7 @@ const Page = async () => {
   const data = await getData();
   return (
     <>
-      <div className="px-28 mx-auto py-10">
+      <div className="px-28 mx-auto py-2">
         <DataTable columns={columns} data={data} />
       </div>
     </>
