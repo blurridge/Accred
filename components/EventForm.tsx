@@ -73,6 +73,10 @@ export function EventForm() {
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
+    defaultValues: {
+      eventName: "",
+      description: "",
+    }
   });
 
   const { formState } = form; // Destructure from form the form state which tells us if form is valid or not.

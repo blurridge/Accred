@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
       <div className="flex gap-5">
-        <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" />
+        <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
