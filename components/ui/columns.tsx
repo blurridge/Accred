@@ -11,6 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteFromFirebase } from "@/utils/deleteFromFirebase";
 
 export type Event = {
   id: string;
@@ -53,8 +54,7 @@ export const columns: ColumnDef<Event>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
-
+      const event = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -67,7 +67,9 @@ export const columns: ColumnDef<Event>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>View</DropdownMenuItem>
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => deleteFromFirebase(event.id)}>
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
