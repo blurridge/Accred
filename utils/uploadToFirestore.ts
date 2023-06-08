@@ -10,14 +10,14 @@ export type Guest = {
   email: string;
 };
 
-type InitialPayload = {
+export type InitialPayload = {
   eventName: string;
   description: string;
   eventDate: Timestamp;
   guestList: Guest[];
 };
 
-type FilePayload = {
+export type FilePayload = {
   eventBanner: string;
   certificateTemplate: string;
 };

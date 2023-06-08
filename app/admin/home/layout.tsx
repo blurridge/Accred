@@ -1,10 +1,14 @@
 import Navbar from "@/components/Navbar";
+import { ReactNode } from "react";
+import { EventDataContextProvider } from "@/context/EventDataContext";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main>
+        <EventDataContextProvider>{children}</EventDataContextProvider>
+      </main>
     </>
   );
 };
