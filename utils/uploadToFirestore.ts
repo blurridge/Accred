@@ -26,25 +26,26 @@ export const sendDocumentToFirestore = async (payload: FormType) => {
   try {
     const parsedGuestList: Guest[] = await parseCSV(payload.guestList);
     const initialPayload: InitialPayload = {
+      // Initial payload are non-file uploads.
       eventName: payload.eventName,
       description: payload.description,
       eventDate: Timestamp.fromDate(payload.eventDate),
       guestList: parsedGuestList,
     };
-    const eventDocRef = await addDoc(collection(db, "events"), initialPayload);
+    const eventDocRef = await addDoc(collection(db, "events"), initialPayload); // Once payload has been added, proceed to storage file uploads.
     const eventBannerURL: string = await uploadPhoto(
       eventDocRef.id,
-      payload.eventBanner,
+      payload.eventBanner
     );
     const certificateTemplateURL: string = await uploadPDF(
       eventDocRef.id,
-      payload.certificateTemplate,
+      payload.certificateTemplate
     );
     const filePayload: FilePayload = {
       eventBanner: eventBannerURL,
       certificateTemplate: certificateTemplateURL,
     };
-    await updateDoc(eventDocRef, filePayload);
+    await updateDoc(eventDocRef, filePayload); // Update document using eventDocRef so downloadURLs to files are added to Firestore doc.
     console.log("Event successfully uploaded to Firebase!");
   } catch (error: any) {
     console.error("Uploading event error occurred", error.message);
