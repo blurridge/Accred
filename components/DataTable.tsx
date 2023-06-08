@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { AddEvent } from "@/components/AddEvent";
 import { useState } from "react";
 import { EventData } from "@/context/EventDataContext";
-import { ColorRing } from "react-loader-spinner";
+import { RingLoader } from "@/components/RingLoader";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -46,8 +46,13 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
-
-  if (!loading) {
+  if (loading) {
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        <RingLoader />
+      </div>
+    );
+  } else {
     return (
       <div>
         <div className="flex justify-between py-4">
@@ -129,20 +134,6 @@ export function DataTable<TData, TValue>({
             Next
           </Button>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <ColorRing
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="blocks-loading"
-          wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-        />
       </div>
     );
   }

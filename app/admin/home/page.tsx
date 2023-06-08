@@ -4,7 +4,7 @@ import { columns } from "@/components/ui/columns";
 const Page = () => {
   return (
     <>
-      <div className="px-28 mx-auto py-2">
+      <div className="h-full px-28 py-2">
         <DataTable columns={columns} />
       </div>
     </>

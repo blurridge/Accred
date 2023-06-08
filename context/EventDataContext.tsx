@@ -13,7 +13,7 @@ type EventDataContextType = {
 
 const EventDataContext = createContext<EventDataContextType>({
   eventData: [],
-  loading: false,
+  loading: true,
 });
 
 export const EventDataContextProvider = ({
@@ -22,7 +22,7 @@ export const EventDataContextProvider = ({
   children: ReactNode;
 }) => {
   const [eventData, setEventData] = useState<Event[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const q = query(collection(db, "events"), orderBy("eventDate", "desc"));
     const unsubscribe = onSnapshot(q, (snap) => {

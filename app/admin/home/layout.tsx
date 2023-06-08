@@ -5,10 +5,10 @@ import { EventDataContextProvider } from "@/context/EventDataContext";
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <Navbar />
-      <main>
+      <div className="h-screen flex flex-col">
+        <Navbar />
         <EventDataContextProvider>{children}</EventDataContextProvider>
-      </main>
+      </div>
     </>
   );
 };
