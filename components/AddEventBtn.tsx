@@ -4,18 +4,20 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { EventForm } from "./EventForm";
+import { useState } from "react";
 
 export const AddEventBtn = () => {
+  const [open, setOpen] = useState(false);
+  const handleDialogClose = () => {
+    setOpen(false);
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
           <Plus className="mr-2 h-4 w-4" /> Add Event
@@ -26,7 +28,7 @@ export const AddEventBtn = () => {
           <DialogTitle>Add an event</DialogTitle>
           <DialogDescription>Enter all event details here.</DialogDescription>
         </DialogHeader>
-        <EventForm />
+        <EventForm handleDialogClose={handleDialogClose} />
       </DialogContent>
     </Dialog>
   );

@@ -22,12 +22,10 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { sendDocumentToFirestore } from "@/utils/uploadToFirestore";
 
 const ACCEPTED_EVENT_BANNER_TYPES = ["image/jpeg", "image/jpg", "image/png"];
-const ACCEPTED_GUEST_LIST_TYPES = [
-  "text/csv",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-];
+const ACCEPTED_GUEST_LIST_TYPES = ["text/csv"];
 const ACCEPTED_CERTIFICATE_TEMPLATE_TYPES = ["application/pdf"];
 
 const formSchema = z.object({
@@ -50,7 +48,7 @@ const formSchema = z.object({
     .any()
     .refine(
       (file) => ACCEPTED_GUEST_LIST_TYPES.includes(file?.type),
-      "Only .csv, and .xlsx file types are supported."
+      "Only .csv file types are supported."
     ),
   eventBanner: z
     .any()
@@ -68,7 +66,11 @@ const formSchema = z.object({
 
 export type FormType = z.infer<typeof formSchema>;
 
-export function EventForm() {
+export const EventForm = ({
+  handleDialogClose,
+}: {
+  handleDialogClose: () => void;
+}) => {
   // Define your form.
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
@@ -76,21 +78,22 @@ export function EventForm() {
     defaultValues: {
       eventName: "",
       description: "",
-    }
+    },
   });
 
   const { formState } = form; // Destructure from form the form state which tells us if form is valid or not.
 
   // Define a submit handler.
-  function onSubmit(values: FormType) {
-    console.log(values);
-  }
+  const onSubmit = async (payload: FormType) => {
+    await sendDocumentToFirestore(payload);
+    handleDialogClose();
+  };
 
   const handleGuestList = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
       form.setValue("guestList", file); // Set the file as the value of guestList field
-      form.trigger("guestList");
+      form.trigger("guestList"); // Manually triggering validation because of custom <Input /> component
     }
   };
 
@@ -98,7 +101,7 @@ export function EventForm() {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
       form.setValue("eventBanner", file); // Set the file as the value of eventBanner field
-      form.trigger("eventBanner");
+      form.trigger("eventBanner"); // Manually triggering validation because of custom <Input /> component
     }
   };
 
@@ -107,8 +110,8 @@ export function EventForm() {
   ) => {
     if (event.target.files) {
       const file = event.target.files[0]; // Get the selected file
-      form.setValue("certificateTemplate", file); // Set the file as the value of eventBanner field
-      form.trigger("certificateTemplate");
+      form.setValue("certificateTemplate", file); // Set the file as the value of certificateTemplate field
+      form.trigger("certificateTemplate"); // Manually triggering validation because of custom <Input /> component
     }
   };
 
@@ -227,4 +230,4 @@ export function EventForm() {
       </form>
     </Form>
   );
-}
+};
