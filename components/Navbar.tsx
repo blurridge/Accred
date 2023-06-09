@@ -19,7 +19,7 @@ import {
 import Image from "next/image";
 import gdscLogo from "@/assets/gdsc_logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Moon, ChevronDown } from "lucide-react";
+import { Moon, ChevronDown, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "next-themes";
 
@@ -53,7 +53,7 @@ export const AdminNavbar = () => {
                 }
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Moon />
+                  {theme === "dark" ? <Sun /> : <Moon />}
                 </NavigationMenuLink>
               </button>
             </NavigationMenuItem>
@@ -113,7 +113,7 @@ export const GuestNavbar = () => {
                 }
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Moon />
+                  {theme === "dark" ? <Sun /> : <Moon />}
                 </NavigationMenuLink>
               </button>
             </NavigationMenuItem>
