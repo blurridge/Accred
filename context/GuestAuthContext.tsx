@@ -11,7 +11,7 @@ import {
 import { auth } from "../firebase/config";
 import { ReactNode } from "react";
 
-type AuthContextProps = {
+export type AuthContextProps = {
   googleLogin: () => void;
   logOut: () => void;
   user: User | null;

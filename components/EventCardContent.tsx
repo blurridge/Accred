@@ -4,7 +4,6 @@ import { GuestLoginButton } from "@/components/GuestLoginButton";
 import { GuestAuth } from "@/context/GuestAuthContext";
 import { Guest } from "@/utils/uploadToFirestore";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
 import { User } from "firebase/auth";
 
 export const EventCardContent = ({ guestList }: { guestList: Guest[] }) => {
