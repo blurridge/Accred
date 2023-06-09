@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { sendDocumentToFirestore } from "@/utils/uploadToFirestore";
+import { ButtonRingLoader } from "./RingLoader";
 
 const ACCEPTED_EVENT_BANNER_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const ACCEPTED_GUEST_LIST_TYPES = ["text/csv"];
@@ -224,9 +225,15 @@ export const EventForm = ({
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={!formState.isValid}>
-          Submit
-        </Button>
+        {formState.isSubmitting ? (
+          <Button disabled>
+            <ButtonRingLoader />
+          </Button>
+        ) : (
+          <Button type="submit" disabled={!formState.isValid}>
+            Submit
+          </Button>
+        )}
       </form>
     </Form>
   );
