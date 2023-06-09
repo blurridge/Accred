@@ -3,11 +3,11 @@
 import { AdminNavbar } from "@/components/Navbar";
 import { ReactNode } from "react";
 import { EventDataContextProvider } from "@/context/EventDataContext";
-import { AdminAuth } from "@/context/AdminAuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  const { user } = AdminAuth();
+  const { user } = useAuth();
   const router = useRouter();
   if (user === null) {
     router.push("/admin/login");

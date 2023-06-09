@@ -1,13 +1,13 @@
 "use client";
 
 import { GuestLoginButton } from "@/components/GuestLoginButton";
-import { GuestAuth } from "@/context/GuestAuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { Guest } from "@/utils/uploadToFirestore";
 import { Button } from "@/components/ui/button";
 import { User } from "firebase/auth";
 
 export const EventCardContent = ({ guestList }: { guestList: Guest[] }) => {
-  const { logOut, user } = GuestAuth();
+  const { logOut, user } = useAuth();
 
   const checkIfUserInGuestList = (user: User) => {
     return guestList.some((person) => person.email === user.email);

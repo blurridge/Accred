@@ -1,14 +1,14 @@
 "use client";
 
 import GoogleButton from "react-google-button";
-import { AdminAuth } from "@/context/AdminAuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { Admin } from "@/components/LoginCard";
 import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export const AdminLoginButton = ({ adminList }: { adminList: Admin[] }) => {
-  const { googleLogin, user, logOut } = AdminAuth();
+  const { googleLogin, user, logOut } = useAuth();
   const [validUser, setValidUser] = useState<boolean>(true);
   const router = useRouter();
 

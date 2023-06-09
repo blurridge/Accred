@@ -10,15 +10,20 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { ReactNode } from "react";
-import { AuthContextProps } from "@/context/GuestAuthContext";
 
-const AdminAuthContext = createContext<AuthContextProps>({
+export type AuthContextProps = {
+  googleLogin: () => void;
+  logOut: () => void;
+  user: User | null;
+};
+
+const AuthContext = createContext<AuthContextProps>({
   googleLogin: () => {},
   logOut: () => {},
   user: null,
 });
 
-export const AdminAuthContextProvider = ({
+export const AuthContextProvider = ({
   children,
 }: {
   children: ReactNode;
@@ -44,12 +49,12 @@ export const AdminAuthContextProvider = ({
   }, []);
 
   return (
-    <AdminAuthContext.Provider value={{ googleLogin, logOut, user }}>
+    <AuthContext.Provider value={{ googleLogin, logOut, user }}>
       {children}
-    </AdminAuthContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export const AdminAuth = () => {
-  return useContext(AdminAuthContext);
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

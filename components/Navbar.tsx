@@ -20,11 +20,10 @@ import Image from "next/image";
 import gdscLogo from "@/assets/gdsc_logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown } from "lucide-react";
-import { AdminAuth } from "@/context/AdminAuthContext";
-import { GuestAuth } from "@/context/GuestAuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 export const AdminNavbar = () => {
-  const { user, logOut } = AdminAuth();
+  const { user, logOut } = useAuth();
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
       <div className="flex gap-5">
@@ -79,7 +78,7 @@ export const AdminNavbar = () => {
 };
 
 export const GuestNavbar = () => {
-  const { user, logOut } = GuestAuth();
+  const { user, logOut } = useAuth();
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
       <div className="flex gap-5">
