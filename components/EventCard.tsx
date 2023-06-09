@@ -79,23 +79,36 @@ export const EventCard = ({ id }: { id: string }) => {
   } else {
     return (
       <>
-        <div className="h-screen px-28">
-          <div className="h-full w-full flex items-center justify-center">
-            <Card className="w-96">
-              <CardHeader>
-                <CardTitle className="text-center">
-                  {eventCardData?.eventName}
-                </CardTitle>
-                <CardDescription className="text-center">
-                  {eventCardData !== undefined
-                    ? new Date(
-                        eventCardData.eventDate.seconds * 1000
-                      ).toLocaleDateString()
-                    : ""}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>{/* Place sign in with Google here */}</CardContent>
-            </Card>
+        <div className="h-screen">
+          <div
+            style={
+              {
+                "--image-url": `url(${eventCardData?.eventBanner})`,
+              } as React.CSSProperties
+            }
+            className="h-full bg-[image:var(--image-url)] bg-center bg-no-repeat bg-cover backdrop-filter"
+          >
+            <div className="h-full backdrop-blur-md">
+              <div className="h-full px-28 w-full flex items-center justify-center">
+                <Card className="w-96">
+                  <CardHeader>
+                    <CardTitle className="text-center">
+                      {eventCardData?.eventName}
+                    </CardTitle>
+                    <CardDescription className="text-center">
+                      {eventCardData !== undefined
+                        ? new Date(
+                            eventCardData.eventDate.seconds * 1000
+                          ).toLocaleDateString()
+                        : ""}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {/* Place sign in with Google here */}
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
         </div>
       </>
