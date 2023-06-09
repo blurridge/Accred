@@ -1,7 +1,6 @@
 import { FormType } from "@/components/EventForm";
-import { db, storage } from "@/firebase/config";
+import { db } from "@/firebase/config";
 import { Timestamp, addDoc, collection, updateDoc } from "firebase/firestore";
-import { ref } from "firebase/storage";
 import { parseCSV } from "./parseCSV";
 import { uploadPDF, uploadPhoto } from "./uploadToStorage";
 

@@ -13,6 +13,7 @@ import { FilePayload, InitialPayload } from "@/utils/uploadToFirestore";
 import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { RingLoader } from "@/components/RingLoader";
+import { EventCardContent } from "@/components/EventCardContent";
 
 type EventCardData = InitialPayload & FilePayload;
 
@@ -103,8 +104,8 @@ export const EventCard = ({ id }: { id: string }) => {
                         : ""}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    {/* Place sign in with Google here */}
+                  <CardContent className="flex flex-col items-center justify-center gap-5">
+                    <EventCardContent guestList={eventCardData?.guestList || []}/>
                   </CardContent>
                 </Card>
               </div>
