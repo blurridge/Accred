@@ -21,8 +21,9 @@ import gdscLogo from "@/assets/gdsc_logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown } from "lucide-react";
 import { AdminAuth } from "@/context/AdminAuthContext";
+import { GuestAuth } from "@/context/GuestAuthContext";
 
-const Navbar = () => {
+export const AdminNavbar = () => {
   const { user, logOut } = AdminAuth();
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
@@ -77,4 +78,58 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export const GuestNavbar = () => {
+  const { user, logOut } = GuestAuth();
+  return (
+    <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
+      <div className="flex gap-5">
+        <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Contact Us
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Moon />
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+      <div className="flex gap-1">
+        {user ? (
+          <>
+            <Avatar>
+              <AvatarImage src={user.photoURL || undefined} alt="@blurridge" />
+              <AvatarFallback>ZM</AvatarFallback>
+            </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button>
+                  <ChevronDown />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={logOut}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : null}
+      </div>
+    </nav>
+  );
+};
