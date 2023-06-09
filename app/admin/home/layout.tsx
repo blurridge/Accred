@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { EventDataContextProvider } from "@/context/EventDataContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { Footer } from "@/components/Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
@@ -17,6 +18,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div className="h-screen flex flex-col">
         <AdminNavbar />
         <EventDataContextProvider>{children}</EventDataContextProvider>
+        <Footer />
       </div>
     </>
   );

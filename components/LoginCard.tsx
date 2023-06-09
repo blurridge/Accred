@@ -22,6 +22,7 @@ export type Admin = {
 export const LoginCard = () => {
   const [adminList, setAdminList] = useState<Admin[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const currentYear = new Date().getFullYear();
   useEffect(() => {
     const q = query(collection(db, "admins"));
     const unsubscribe = onSnapshot(q, (snap) => {
@@ -60,7 +61,28 @@ export const LoginCard = () => {
           <CardContent>
             <AdminLoginButton adminList={adminList} />
           </CardContent>
-          <CardFooter>by @blurridge | Zach Riane Machacon</CardFooter>
+          <CardFooter>
+            <p className="m-auto text-center text-gray-500">
+              © {currentYear} Made with 🖤 by{" "}
+              <a
+                href="https://github.com/blurridge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                @blurridge
+              </a>{" "}
+              |{" "}
+              <a
+                href="https://www.linkedin.com/in/zachriane/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Zach Riane Machacon
+              </a>
+            </p>
+          </CardFooter>
         </Card>
       </>
     );

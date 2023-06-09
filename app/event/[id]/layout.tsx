@@ -1,5 +1,6 @@
 import { GuestNavbar } from "@/components/Navbar";
 import { ReactNode } from "react";
+import { Footer } from "@/components/Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -7,6 +8,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div className="h-screen flex flex-col">
         <GuestNavbar />
         {children}
+        <Footer />
       </div>
     </>
   );
