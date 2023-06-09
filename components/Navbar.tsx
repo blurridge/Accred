@@ -21,11 +21,13 @@ import gdscLogo from "@/assets/gdsc_logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "next-themes";
 
 export const AdminNavbar = () => {
   const { user, logOut } = useAuth();
+  const { theme, setTheme } = useTheme();
   return (
-    <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
+    <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">
         <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
         <NavigationMenu>
@@ -45,11 +47,15 @@ export const AdminNavbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/docs" legacyBehavior passHref>
+              <button
+                onClick={() =>
+                  theme === "dark" ? setTheme("light") : setTheme("dark")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Moon />
                 </NavigationMenuLink>
-              </Link>
+              </button>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -79,8 +85,9 @@ export const AdminNavbar = () => {
 
 export const GuestNavbar = () => {
   const { user, logOut } = useAuth();
+  const { theme, setTheme } = useTheme();
   return (
-    <nav className="flex bg-white drop-shadow-xl p-5 justify-between">
+    <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">
         <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
         <NavigationMenu>
@@ -100,11 +107,15 @@ export const GuestNavbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/docs" legacyBehavior passHref>
+              <button
+                onClick={() =>
+                  theme === "dark" ? setTheme("light") : setTheme("dark")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Moon />
                 </NavigationMenuLink>
-              </Link>
+              </button>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

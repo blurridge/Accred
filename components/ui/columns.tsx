@@ -36,7 +36,7 @@ export const columns: ColumnDef<Event>[] = [
     header: "Guests",
     cell: ({ row }) => {
       return (
-        <div className="bg-[#F0F1FA] text-center rounded-lg py-1">
+        <div className="bg-[#F0F1FA] dark:bg-[#0f1a36] text-center rounded-lg py-1">
           {row.getValue("guests")}
         </div>
       );
