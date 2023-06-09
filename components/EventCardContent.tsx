@@ -26,12 +26,14 @@ export const EventCardContent = ({ guestList }: { guestList: Guest[] }) => {
   } else if (checkIfUserInGuestList(user)) {
     return (
       <>
-        <Button>Download PDF</Button>
-        <Button>Send to Email</Button>
-        <Button>Add to LinkedIn</Button>
-        <Button variant="destructive" onClick={handleLogOut}>
-          Logout
-        </Button>
+        <div className="flex flex-col gap-2 w-5/12">
+          <Button>Download PDF</Button>
+          <Button>Send to Email</Button>
+          <Button>Add to LinkedIn</Button>
+          <Button variant="destructive" onClick={handleLogOut}>
+            Logout
+          </Button>
+        </div>
       </>
     );
   } else {
