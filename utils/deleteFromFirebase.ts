@@ -14,14 +14,14 @@ export const deleteFromFirebase = async (id: string) => {
     .then(() => {
       console.log("Banner deleted successfully.");
     })
-    .catch((error) => {
-      console.log("Error deleting event banner.");
+    .catch((error: any) => {
+      console.log("Error deleting event banner: ", error.message);
     });
   deleteObject(certRef)
     .then(() => {
       console.log("Certificate deleted successfully.");
     })
-    .catch((error) => {
-      console.log("Error deleting certificate template.");
+    .catch((error: any) => {
+      console.log("Error deleting certificate template: ", error.message);
     });
 };

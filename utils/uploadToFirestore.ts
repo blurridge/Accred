@@ -24,7 +24,7 @@ export type FilePayload = {
 
 export const sendDocumentToFirestore = async (payload: FormType) => {
   try {
-    const parsedGuestList: Guest[] = await parseCSV(payload.guestList);
+    const parsedGuestList: Guest[] = await parseCSV(payload.guestList); // Convert .csv file to JSON format
     const initialPayload: InitialPayload = {
       // Initial payload are non-file uploads.
       eventName: payload.eventName,
@@ -33,6 +33,7 @@ export const sendDocumentToFirestore = async (payload: FormType) => {
       guestList: parsedGuestList,
     };
     const eventDocRef = await addDoc(collection(db, "events"), initialPayload); // Once payload has been added, proceed to storage file uploads.
+    // Compress event banner to ensure fast loading of event page. It is blurred so losing quality is fine.
     const compressedBanner = await compressBanner(payload.eventBanner);
     const eventBannerURL: string = await uploadPhoto(
       eventDocRef.id,
