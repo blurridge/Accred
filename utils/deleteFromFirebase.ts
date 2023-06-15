@@ -4,7 +4,7 @@ import { ref, deleteObject } from "firebase/storage";
 
 export const deleteFromFirebase = async (id: string) => {
   const bannerRef = ref(storage, `${id}-banner.jpg`);
-  const certRef = ref(storage, `${id}-cert.pdf`);
+  const certRef = ref(storage, `${id}-cert.jpg`);
   try {
     await deleteDoc(doc(db, "events", id));
   } catch (error: any) {

@@ -25,9 +25,8 @@ import { cn } from "@/lib/utils";
 import { sendDocumentToFirestore } from "@/utils/uploadToFirestore";
 import { ButtonRingLoader } from "./RingLoader";
 
-const ACCEPTED_EVENT_BANNER_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const ACCEPTED_GUEST_LIST_TYPES = ["text/csv"];
-const ACCEPTED_CERTIFICATE_TEMPLATE_TYPES = ["application/pdf"];
 
 const formSchema = z.object({
   eventName: z
@@ -54,14 +53,14 @@ const formSchema = z.object({
   eventBanner: z
     .any()
     .refine(
-      (file) => ACCEPTED_EVENT_BANNER_TYPES.includes(file?.type),
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .jpeg, .jpg, and .png file types are supported."
     ),
   certificateTemplate: z
     .any()
     .refine(
-      (file) => ACCEPTED_CERTIFICATE_TEMPLATE_TYPES.includes(file?.type),
-      "Only .pdf file types are supported."
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpeg, .jpg, and .png file types are supported."
     ),
 });
 

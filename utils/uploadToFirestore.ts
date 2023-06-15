@@ -2,7 +2,7 @@ import { FormType } from "@/components/EventForm";
 import { db } from "@/firebase/config";
 import { Timestamp, addDoc, collection, updateDoc } from "firebase/firestore";
 import { parseCSV } from "@/utils/parseCSV";
-import { uploadPDF, uploadPhoto } from "@/utils/uploadToStorage";
+import { uploadPhoto } from "@/utils/uploadToStorage";
 import { compressBanner } from "@/utils/compressBanner";
 
 export type Guest = {
@@ -37,11 +37,13 @@ export const sendDocumentToFirestore = async (payload: FormType) => {
     const compressedBanner = await compressBanner(payload.eventBanner);
     const eventBannerURL: string = await uploadPhoto(
       eventDocRef.id,
-      compressedBanner
+      compressedBanner,
+      "banner"
     );
-    const certificateTemplateURL: string = await uploadPDF(
+    const certificateTemplateURL: string = await uploadPhoto(
       eventDocRef.id,
-      payload.certificateTemplate
+      payload.certificateTemplate,
+      "cert"
     );
     const filePayload: FilePayload = {
       eventBanner: eventBannerURL,
