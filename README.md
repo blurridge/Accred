@@ -1,6 +1,6 @@
 # Accred - An Event E-Certificate Generator Web App 🎖️
 
-![Accred Logo](https://i.imgur.com/4WFjmUc.png)
+![Accred Logo](https://i.imgur.com/gKwYMID.png)
 
 ## Context
 
