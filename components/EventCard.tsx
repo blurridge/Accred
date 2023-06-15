@@ -110,6 +110,11 @@ export const EventCard = ({ id }: { id: string }) => {
                       certificateTemplate={
                         eventCardData?.certificateTemplate || ""
                       }
+                      eventName={eventCardData?.eventName || ""}
+                      eventDate={
+                        eventCardData?.eventDate ||
+                        Timestamp.fromDate(new Date())
+                      }
                     />
                   </CardContent>
                 </Card>

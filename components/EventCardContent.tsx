@@ -7,13 +7,19 @@ import { Button } from "@/components/ui/button";
 import { User } from "firebase/auth";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Certificate from "./Certificate";
+import { generateLinkedInShareURL } from "@/utils/generateLinkedInShareURL";
+import { Timestamp } from "firebase/firestore";
 
 export const EventCardContent = ({
   guestList,
   certificateTemplate,
+  eventName,
+  eventDate,
 }: {
   guestList: Guest[];
   certificateTemplate: string;
+  eventName: string;
+  eventDate: Timestamp;
 }) => {
   const { logOut, user } = useAuth();
 
@@ -27,6 +33,20 @@ export const EventCardContent = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleAddToLinkedIn = () => {
+    const timestampMillis = eventDate.toMillis();
+    const date = new Date(timestampMillis);
+    const eventYear = date.getFullYear();
+    const eventMonth = date.getMonth() + 1;
+    const shareURL = generateLinkedInShareURL({
+      orgName: "Google Developer Student Clubs San Carlos",
+      certTitle: eventName,
+      certYear: eventYear,
+      certMonth: eventMonth,
+    });
+    window.open(shareURL, "_blank");
   };
 
   if (user === null) {
@@ -46,7 +66,9 @@ export const EventCardContent = ({
             {({ loading }) =>
               loading ? (
                 <div>
-                  <Button className="w-full" disabled>Loading PDF...</Button>
+                  <Button className="w-full" disabled>
+                    Loading PDF...
+                  </Button>
                 </div>
               ) : (
                 <div>
@@ -56,7 +78,7 @@ export const EventCardContent = ({
             }
           </PDFDownloadLink>
           <Button>Send to Email</Button>
-          <Button>Add to LinkedIn</Button>
+          <Button onClick={handleAddToLinkedIn}>Add to LinkedIn</Button>
           <Button variant="destructive" onClick={handleLogOut}>
             Logout
           </Button>
