@@ -45,12 +45,12 @@ export const EventCardContent = ({
           >
             {({ loading }) =>
               loading ? (
-                <div className="w-full">
-                  <Button disabled>Loading PDF...</Button>
+                <div>
+                  <Button className="w-full" disabled>Loading PDF...</Button>
                 </div>
               ) : (
-                <div className="w-full">
-                  <Button>Download PDF</Button>
+                <div>
+                  <Button className="w-full">Download PDF</Button>
                 </div>
               )
             }
