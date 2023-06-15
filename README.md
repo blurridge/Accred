@@ -22,6 +22,12 @@ By working on Accred, I not only addressed the pressing issue of e-certificate m
 
 <p><a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> </p>
 
+## Screenshots
+
+![Admin Page](https://i.imgur.com/xGOdUq9.png)
+![Add Event Modal](https://i.imgur.com/Nf2vfAr.png)
+![Event Page](https://i.imgur.com/VOlzLUU.png)
+
 ## Run Locally
 
 Clone the project
