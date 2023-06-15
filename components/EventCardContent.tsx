@@ -5,8 +5,16 @@ import { useAuth } from "@/context/AuthContext";
 import { Guest } from "@/utils/uploadToFirestore";
 import { Button } from "@/components/ui/button";
 import { User } from "firebase/auth";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Certificate from "./Certificate";
 
-export const EventCardContent = ({ guestList }: { guestList: Guest[] }) => {
+export const EventCardContent = ({
+  guestList,
+  certificateTemplate,
+}: {
+  guestList: Guest[];
+  certificateTemplate: string;
+}) => {
   const { logOut, user } = useAuth();
 
   const checkIfUserInGuestList = (user: User) => {
@@ -27,7 +35,26 @@ export const EventCardContent = ({ guestList }: { guestList: Guest[] }) => {
     return (
       <>
         <div className="flex flex-col gap-2 w-5/12">
-          <Button>Download PDF</Button>
+          <PDFDownloadLink
+            document={
+              <Certificate
+                certificateTemplate={certificateTemplate}
+                guestName={user?.displayName || ""}
+              />
+            }
+          >
+            {({ loading }) =>
+              loading ? (
+                <div className="w-full">
+                  <Button disabled>Loading PDF...</Button>
+                </div>
+              ) : (
+                <div className="w-full">
+                  <Button>Download PDF</Button>
+                </div>
+              )
+            }
+          </PDFDownloadLink>
           <Button>Send to Email</Button>
           <Button>Add to LinkedIn</Button>
           <Button variant="destructive" onClick={handleLogOut}>

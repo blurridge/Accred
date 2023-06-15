@@ -105,7 +105,12 @@ export const EventCard = ({ id }: { id: string }) => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center justify-center gap-5">
-                    <EventCardContent guestList={eventCardData?.guestList || []}/>
+                    <EventCardContent
+                      guestList={eventCardData?.guestList || []}
+                      certificateTemplate={
+                        eventCardData?.certificateTemplate || ""
+                      }
+                    />
                   </CardContent>
                 </Card>
               </div>
