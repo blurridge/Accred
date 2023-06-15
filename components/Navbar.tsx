@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import gdscLogo from "@/assets/gdsc_logo.png";
+import accredLogo from "@/assets/accred_logo.svg";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -29,7 +29,13 @@ export const AdminNavbar = () => {
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">
-        <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
+        <Image
+          src={accredLogo}
+          width={70}
+          alt="Accred Logo"
+          className={theme === "light" ? "" : "invert"}
+          priority
+        />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -89,7 +95,13 @@ export const GuestNavbar = () => {
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">
-        <Image src={gdscLogo} width={82} height={40} alt="GDSC Logo" priority />
+        <Image
+          src={accredLogo}
+          width={70}
+          alt="Accred Logo"
+          className={theme === "light" ? "" : "invert"}
+          priority
+        />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>

@@ -12,8 +12,9 @@ import { collection, query, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { RingLoader } from "@/components/RingLoader";
 import { AdminLoginButton } from "@/components/AdminLoginButton";
-import gdscLogo from "@/assets/gdsc_logo.png";
+import accredSq from "@/assets/accred_sq.svg";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export type Admin = {
   email: string;
@@ -22,6 +23,7 @@ export type Admin = {
 export const LoginCard = () => {
   const [adminList, setAdminList] = useState<Admin[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { theme } = useTheme();
   const currentYear = new Date().getFullYear();
   useEffect(() => {
     const q = query(collection(db, "admins"));
@@ -47,15 +49,14 @@ export const LoginCard = () => {
         <Card className="w-96 flex flex-col items-center justify-center ">
           <CardHeader className="flex flex-col items-center justify-center gap-3">
             <Image
-              src={gdscLogo}
-              width={82}
-              height={40}
-              alt="GDSC Logo"
+              src={accredSq}
+              width={200}
+              alt="Accred Dark Logo"
+              className={theme === "light" ? "" : "invert"}
               priority
             />
             <CardTitle className="text-center">
-              Google Developer Student Clubs - University of San Carlos
-              Certificate Generator
+              Event E-Certificate Generator Admin Page
             </CardTitle>
           </CardHeader>
           <CardContent>
