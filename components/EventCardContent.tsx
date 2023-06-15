@@ -77,7 +77,6 @@ export const EventCardContent = ({
               )
             }
           </PDFDownloadLink>
-          <Button>Send to Email</Button>
           <Button onClick={handleAddToLinkedIn}>Add to LinkedIn</Button>
           <Button variant="destructive" onClick={handleLogOut}>
             Logout
