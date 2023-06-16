@@ -1,7 +1,8 @@
 # Accred - An Event E-Certificate Generator Web App 🎖️
 
 ![Accred Logo](https://i.imgur.com/gKwYMID.png)
-
+![Commit Shield](https://img.shields.io/github/last-commit/blurridge/Accred?style=for-the-badge)
+![License](https://img.shields.io/github/license/blurridge/Accred?style=for-the-badge)
 ## Context
 
 I developed Accred as a side project due to the struggles I faced in managing e-certificate generation for the Google Developer Student Clubs at the University of San Carlos. Our existing process of generating and storing certificates in our drive was time-consuming and required constant work from the core team. Additionally, it was taking up a significant amount of storage space.
