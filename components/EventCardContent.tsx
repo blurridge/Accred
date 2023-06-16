@@ -9,6 +9,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import Certificate from "@/components/Certificate";
 import { generateLinkedInShareURL } from "@/utils/generateLinkedInShareURL";
 import { Timestamp } from "firebase/firestore";
+import { useRef } from "react";
 
 export const EventCardContent = ({
   guestList,
@@ -22,9 +23,15 @@ export const EventCardContent = ({
   eventDate: Timestamp;
 }) => {
   const { logOut, user } = useAuth();
+  const certId = useRef<string>("");
 
   const checkIfUserInGuestList = (user: User) => {
-    return guestList.some((person) => person.email === user.email);
+    const foundGuest = guestList.find((person) => person.email === user.email);
+    if (foundGuest) {
+      certId.current = foundGuest.certId;
+      return true;
+    }
+    return false;
   };
 
   const handleLogOut = () => {
@@ -45,13 +52,17 @@ export const EventCardContent = ({
       certTitle: eventName,
       certYear: eventYear,
       certMonth: eventMonth,
+      certId: certId.current,
+      certURL: `${window.location.href}/certificate/${certId.current}`,
     });
     window.open(shareURL, "_blank");
   };
 
+  const userInGuestList = user !== null && checkIfUserInGuestList(user);
+
   if (user === null) {
     return <GuestLoginButton />;
-  } else if (checkIfUserInGuestList(user)) {
+  } else if (userInGuestList) {
     return (
       <>
         <div className="flex flex-col gap-2 w-5/12">
