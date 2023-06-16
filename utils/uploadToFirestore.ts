@@ -8,6 +8,7 @@ import { compressBanner } from "@/utils/compressBanner";
 export type Guest = {
   name: string;
   email: string;
+  certId: string;
 };
 
 export type InitialPayload = {

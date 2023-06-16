@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { RingLoader } from "@/components/RingLoader";
 import { EventCardContent } from "@/components/EventCardContent";
 
-type EventCardData = InitialPayload & FilePayload;
+export type EventCardData = InitialPayload & FilePayload;
 
 export const EventCard = ({ id }: { id: string }) => {
   const [eventCardData, setEventCardData] = useState<EventCardData>();

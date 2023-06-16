@@ -6,7 +6,7 @@ import { Guest } from "@/utils/uploadToFirestore";
 import { Button } from "@/components/ui/button";
 import { User } from "firebase/auth";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import Certificate from "./Certificate";
+import Certificate from "@/components/Certificate";
 import { generateLinkedInShareURL } from "@/utils/generateLinkedInShareURL";
 import { Timestamp } from "firebase/firestore";
 
