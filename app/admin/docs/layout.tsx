@@ -1,10 +1,24 @@
-import Navbar from "@/components/Navbar";
+"use client";
 
-const Layout = ({ children }) => {
+import { AdminNavbar } from "@/components/Navbar";
+import { ReactNode } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { Footer } from "@/components/Footer";
+
+const Layout = ({ children }: { children: ReactNode }) => {
+  const { user } = useAuth();
+  const router = useRouter();
+  if (user === null) {
+    router.push("/admin/login");
+  }
   return (
     <>
-      <Navbar />
-      <main>{children}</main>
+      <div className="h-screen flex flex-col">
+        <AdminNavbar />
+        {children}
+        <Footer />
+      </div>
     </>
   );
 };

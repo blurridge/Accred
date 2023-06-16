@@ -14,7 +14,6 @@ import { RingLoader } from "@/components/RingLoader";
 import { AdminLoginButton } from "@/components/AdminLoginButton";
 import accredSq from "@/assets/accred_sq.svg";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 
 export type Admin = {
   email: string;
@@ -23,7 +22,6 @@ export type Admin = {
 export const LoginCard = () => {
   const [adminList, setAdminList] = useState<Admin[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { theme } = useTheme();
   const currentYear = new Date().getFullYear();
   useEffect(() => {
     const q = query(collection(db, "admins"));
@@ -52,7 +50,7 @@ export const LoginCard = () => {
               src={accredSq}
               width={200}
               alt="Accred Dark Logo"
-              className={theme === "light" ? "" : "invert"}
+              className="dark:invert"
               priority
             />
             <CardTitle className="text-center">

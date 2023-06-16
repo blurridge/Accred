@@ -1,0 +1,62 @@
+# What is Accred?
+
+Accred is a web application designed to simplify the process of generating e-certificates on demand. It was created to address the challenges faced in managing e-certificate generation for the Google Developer Student Clubs at the University of San Carlos. Accred was developed by Zach Riane Machacon (@blurridge), the GDSC San Carlos Lead ‘22 - ‘23. This user guide will walk you through the process of using Accred and provide instructions on how to maximize its features efficiently.
+
+## Accessing Accred
+
+1. Open your web browser and enter the URL [URL_HERE].
+2. Make sure you have a stable internet connection.
+3. On the Accred admin page, you will be presented with a login screen.
+4. Login using your Gmail account, which has been authorized by the developer.
+
+## User Roles and Permissions
+
+Accred supports different user roles, each with specific permissions. The available user roles include administrators and regular users. The permissions granted to each role determine the actions they can perform within the application.
+
+# Certificate Generation
+
+## Creating a New Event
+
+1. Navigate to the home page of the admin panel.
+2. Click on the "Add Event" button.
+3. Fill in the required information, such as the event title, description, event date, event banner, guest list, and certificate template.
+   - For the event banner, guest list, and certificate template, only the following file types are allowed:
+     - Event Banner and Certificate Template: .png, .jpg, .jpeg
+     - Guest List: .csv (with email and name headers only)
+
+## Importing Participant Data
+
+1. To generate certificates for participants, you need to import their data into Accred.
+2. Prepare a CSV file containing the participant details, including their names and email addresses.
+3. Upload the CSV file in Accred's import section.
+
+## Generating Certificates
+
+1. After creating an event, a webpage will be created specifically for it.
+2. To view the event page, go to your table of events and click on the dropdown menu next to the event row.
+3. Select "View Event Page" from the dropdown menu.
+
+## Deleting Events
+
+1. To delete an event, go to your table of events.
+2. Click on the dropdown menu next to the event row.
+3. Choose the "Delete" option from the dropdown menu.
+
+# Managing Certificates
+
+## Viewing Generated Certificates
+
+1. Regular users can access the page generated for the event.
+2. Regular users will be prompted to login via Google.
+3. Upon successful validation of a participant's email against the guest list stored in the database:
+   - A list of options to download a PDF of their certificate and add it to LinkedIn will be displayed.
+4. If a participant's email is not found on the guest list, they will see a message stating that they are an invalid guest and cannot generate a certificate.
+5. After generating a certificate, a verification link will be generated to ensure its validity. This verification link can be accessed by adding the certificate to LinkedIn and checking the certificate URL.
+
+# Troubleshooting
+
+As Accred is still in its alpha stage, please redirect all bug reports to the developer, Zach Riane Machacon, through his email: zachriane01@gmail.com.
+
+# Conclusion
+
+Accred is a powerful web application designed to automate e-certificate generation. By following this user guide, you should now have a clear understanding of how to use Accred efficiently. If you have any further questions or need additional assistance, please refer to the support documentation or contact Zach Riane Machacon (@blurridge) directly.

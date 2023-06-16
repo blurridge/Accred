@@ -33,7 +33,7 @@ export const AdminNavbar = () => {
           src={accredLogo}
           width={70}
           alt="Accred Logo"
-          className={theme === "light" ? "" : "invert"}
+          className="dark:invert"
           priority
         />
         <NavigationMenu>
@@ -99,7 +99,7 @@ export const GuestNavbar = () => {
           src={accredLogo}
           width={70}
           alt="Accred Logo"
-          className={theme === "light" ? "" : "invert"}
+          className="dark:invert"
           priority
         />
         <NavigationMenu>
