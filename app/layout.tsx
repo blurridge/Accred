@@ -2,6 +2,7 @@ import { AuthContextProvider } from "@/context/AuthContext";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeContext } from "@/context/ThemeContext";
+import { AdminContextProvider } from "@/context/AdminContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <AuthContextProvider>
         <ThemeContext>
-          <body className={inter.className}>{children}</body>
+          <AdminContextProvider>
+            <body className={inter.className}>{children}</body>
+          </AdminContextProvider>
         </ThemeContext>
       </AuthContextProvider>
     </html>

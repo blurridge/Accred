@@ -22,6 +22,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "next-themes";
+import { AdminData } from "@/context/AdminContext";
+import { User } from "firebase/auth";
 
 export const AdminNavbar = () => {
   const { user, logOut } = useAuth();
@@ -46,9 +48,16 @@ export const AdminNavbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/admin/docs" legacyBehavior passHref>
+              <Link href="/docs" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Help
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Contact Us
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -91,7 +100,14 @@ export const AdminNavbar = () => {
 
 export const GuestNavbar = () => {
   const { user, logOut } = useAuth();
+  const { adminList } = AdminData();
   const { theme, setTheme } = useTheme();
+  const checkIfUserIsAdmin = (user: User) => {
+    return (
+      adminList.length !== 0 &&
+      adminList.some((person) => person.email === user.email)
+    );
+  };
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">
@@ -108,6 +124,22 @@ export const GuestNavbar = () => {
               <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            {user && checkIfUserIsAdmin(user) ? (
+              <NavigationMenuItem>
+                <Link href="/admin/home" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Admin
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ) : null}
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Help
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

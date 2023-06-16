@@ -2,7 +2,7 @@
 
 import GoogleButton from "react-google-button";
 import { useAuth } from "@/context/AuthContext";
-import { Admin } from "@/components/LoginCard";
+import { Admin } from "@/context/AdminContext";
 import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

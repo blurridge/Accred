@@ -1,7 +1,6 @@
 "use client";
 
 import ContactMe from "@/components/ContactMe.mdx";
-import accredLs from "@/assets/accred_ls.svg";
 import Image from "next/image";
 
 const Page = () => {

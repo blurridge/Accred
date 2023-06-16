@@ -7,34 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { db } from "@/firebase/config";
-import { collection, query, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { AdminData } from "@/context/AdminContext";
 import { RingLoader } from "@/components/RingLoader";
 import { AdminLoginButton } from "@/components/AdminLoginButton";
 import accredSq from "@/assets/accred_sq.svg";
 import Image from "next/image";
 
-export type Admin = {
-  email: string;
-};
-
 export const LoginCard = () => {
-  const [adminList, setAdminList] = useState<Admin[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { adminList, loading } = AdminData();
   const currentYear = new Date().getFullYear();
-  useEffect(() => {
-    const q = query(collection(db, "admins"));
-    const unsubscribe = onSnapshot(q, (snap) => {
-      setLoading(true);
-      const data: Admin[] = snap.docs.map((doc) => ({
-        email: doc.data().email,
-      }));
-      setAdminList(data);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
   if (loading) {
     return (
       <div className="h-full w-full flex items-center justify-center">
@@ -57,7 +38,7 @@ export const LoginCard = () => {
               Event E-Certificate Generator Admin Page
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="text-center">
             <AdminLoginButton adminList={adminList} />
           </CardContent>
           <CardFooter>
