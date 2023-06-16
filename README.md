@@ -57,7 +57,7 @@ Start the server
 ## Structure
 
 ```
-📦 
+📦
 ├─ .eslintrc.json
 ├─ .gitignore
 ├─ README.md
@@ -74,6 +74,9 @@ Start the server
 │  │  └─ page.tsx
 │  ├─ event
 │  │  └─ [id]
+│  │     ├─ certificate
+│  │     │  └─ [certId]
+│  │     │     └─ page.tsx
 │  │     ├─ layout.tsx
 │  │     └─ page.tsx
 │  ├─ favicon.ico
@@ -89,6 +92,7 @@ Start the server
 │  ├─ AddEvent.tsx
 │  ├─ AdminLoginButton.tsx
 │  ├─ Certificate.tsx
+│  ├─ CertificateVerifier.tsx
 │  ├─ DataTable.tsx
 │  ├─ EventCard.tsx
 │  ├─ EventCardContent.tsx
@@ -139,3 +143,7 @@ Start the server
    ├─ uploadToFirestore.ts
    └─ uploadToStorage.ts
 ```
+
+## Acknowledgements
+
+I would like to acknowledge the work of [Ned Palacios](https://github.com/nedpals) and [GDSC University of Immaculate Conception](https://github.com/gdsc-uic) as the inspiration for this project's concept of certificate generation which was originally done in Vue for [LAWIG - a GDSC Philippines Info Session](https://github.com/gdsc-uic/lawig-cert-gen).
