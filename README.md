@@ -27,6 +27,7 @@ By working on Accred, I not only addressed the pressing issue of e-certificate m
 ![Admin Page](https://i.imgur.com/xGOdUq9.png)
 ![Add Event Modal](https://i.imgur.com/Nf2vfAr.png)
 ![Event Page](https://i.imgur.com/VOlzLUU.png)
+![Certificate Verification Page](https://i.imgur.com/2agmPCl.png)
 
 ## Run Locally
 
