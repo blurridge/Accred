@@ -12,7 +12,7 @@ export const parseCSV = (csvFile: any): Promise<Guest[]> => {
           // 1. Convert the object into 2d arrays (e.g. { email: hello@foo.com, name: Foo } -> [[email, hello@foo.com], [name, Foo]])
           csvData.map(Object.entries)
           // 2. Filter out entries whose trimmed values (in index 1) are empty.
-            .filter(row => row.every(r => r[1].trim().value != 0))
+            .filter(row => row.every(r => r[1].trim().length != 0))
           // 3. Convert the 2d arrays back into objects
             .map<typeof csvData[0]>(Object.fromEntries);
 
