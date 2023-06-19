@@ -19,7 +19,7 @@ export const columns: ColumnDef<Event>[] = [
     cell: ({ row }) => {
       const date = row.getValue("date") as Timestamp;
       const seconds = date.seconds;
-      const outputDate = new Date(seconds * 1000).toISOString().split("T")[0];
+      const outputDate = new Date(seconds * 1000).toLocaleDateString().split("T")[0];
       return <div className="text-center">{outputDate}</div>;
     },
   },
