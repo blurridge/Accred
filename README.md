@@ -50,6 +50,17 @@ Install dependencies
   npm install
 ```
 
+Create a `.env` file containing your Firebase variables. Use `.env.example` as a template.
+```
+NEXT_PUBLIC_FIREBASE_API_KEY              = <<your firebase api key here>>
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN          = <<your firebase auth domain here>>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID           = <<your firebase project id here>>
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET       = <<your firebase storage bucket here>>
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID  = <<your firebase messaging sender id here>>
+NEXT_PUBLIC_FIREBASE_APP_ID               = <<your firebase app id here>>
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID       = <<your firebase measurement id here>>
+```
+
 Start the server
 
 ```bash
@@ -59,20 +70,25 @@ Start the server
 ## Structure
 
 ```
-📦
+📦 
+├─ .env.example
 ├─ .eslintrc.json
 ├─ .gitignore
+├─ LICENSE
 ├─ README.md
 ├─ app
 │  ├─ admin
-│  │  ├─ docs
-│  │  │  ├─ layout.tsx
-│  │  │  └─ page.tsx
 │  │  ├─ home
 │  │  │  ├─ layout.tsx
 │  │  │  └─ page.tsx
 │  │  ├─ login
 │  │  │  └─ page.tsx
+│  │  └─ page.tsx
+│  ├─ contact
+│  │  ├─ layout.tsx
+│  │  └─ page.tsx
+│  ├─ docs
+│  │  ├─ layout.tsx
 │  │  └─ page.tsx
 │  ├─ event
 │  │  └─ [id]
@@ -84,6 +100,7 @@ Start the server
 │  ├─ favicon.ico
 │  ├─ globals.css
 │  ├─ layout.tsx
+│  ├─ mdx-components.tsx
 │  └─ page.tsx
 ├─ assets
 │  ├─ accred_logo.svg
@@ -92,14 +109,17 @@ Start the server
 │  └─ gdsc_logo.png
 ├─ components
 │  ├─ AddEvent.tsx
+│  ├─ AdminGuide.mdx
 │  ├─ AdminLoginButton.tsx
 │  ├─ Certificate.tsx
 │  ├─ CertificateVerifier.tsx
+│  ├─ ContactMe.mdx
 │  ├─ DataTable.tsx
 │  ├─ EventCard.tsx
 │  ├─ EventCardContent.tsx
 │  ├─ EventDropdown.tsx
 │  ├─ EventForm.tsx
+│  ├─ FeatureCards.tsx
 │  ├─ Footer.tsx
 │  ├─ GuestLoginButton.tsx
 │  ├─ LoginCard.tsx
@@ -149,3 +169,18 @@ Start the server
 ## Acknowledgements
 
 I would like to acknowledge the work of [Ned Palacios](https://github.com/nedpals) and [GDSC University of Immaculate Conception](https://github.com/gdsc-uic) as the inspiration for this project's concept of certificate generation which was originally done in Vue for [LAWIG - a GDSC Philippines Info Session](https://github.com/gdsc-uic/lawig-cert-gen).
+
+## Stay in touch
+
+If you have any questions, suggestions, need further assistance, or would like to avail of Accred for your organization, feel free to reach out to me. I'm always happy to help!
+
+- Email: [zachriane01@gmail.com](mailto:zachriane01@gmail.com)
+- GitHub: [@blurridge](https://github.com/blurridge)
+- Twitter: [@zachahalol](https://twitter.com/zachahalol)
+- Instagram: [@zachahalol](https://www.instagram.com/zachahalol)
+- LinkedIn: [Zach Riane Machacon](https://www.linkedin.com/in/zachriane)
+
+## Contributors
+<a href="https://github.com/blurridge/accred/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=blurridge/accred" />
+</a>
