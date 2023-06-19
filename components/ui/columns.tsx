@@ -46,7 +46,7 @@ export const columns: ColumnDef<Event>[] = [
     id: "actions",
     cell: ({ row }) => {
       const event = row.original;
-      return <EventDropdown id={event.id} />;
+      return <EventDropdown eventData={event} />;
     },
   },
 ];

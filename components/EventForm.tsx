@@ -22,25 +22,34 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { sendDocumentToFirestore } from "@/utils/uploadToFirestore";
+import {
+  sendDocumentToFirestore,
+  editDocumentInFirestore,
+} from "@/utils/uploadToFirestore";
 import { ButtonRingLoader } from "./RingLoader";
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const ACCEPTED_GUEST_LIST_TYPES = ["text/csv"];
 
-const formSchema = z.object({
+const addingFormSchema = z.object({
   eventName: z
     .string({
       required_error: "An event name is required.",
     })
-    .min(2)
-    .max(50),
+    .min(2, { message: "Event name must must be 2 or more characters long." })
+    .max(50, {
+      message: "Event name must must be 50 or less characters long.",
+    }),
   description: z
     .string({
       required_error: "An event description is required.",
     })
-    .min(2)
-    .max(50),
+    .min(2, {
+      message: "Event description must must be 2 or more characters long.",
+    })
+    .max(50, {
+      message: "Event description must must be 50 or less characters long.",
+    }),
   eventDate: z.date({
     required_error: "An event date is required.",
   }),
@@ -64,20 +73,78 @@ const formSchema = z.object({
     ),
 });
 
-export type FormType = z.infer<typeof formSchema>;
+const editingFormSchema = z.object({
+  eventName: z
+    .string({
+      required_error: "An event name is required.",
+    })
+    .min(2, { message: "Event name must must be 2 or more characters long." })
+    .max(50, {
+      message: "Event name must must be 50 or less characters long.",
+    }),
+  description: z
+    .string({
+      required_error: "An event description is required.",
+    })
+    .min(2, {
+      message: "Event description must must be 2 or more characters long.",
+    })
+    .max(50, {
+      message: "Event description must must be 50 or less characters long.",
+    }),
+  eventDate: z.date({
+    required_error: "An event date is required.",
+  }),
+  guestList: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_GUEST_LIST_TYPES.includes(file?.type),
+      "Only .csv file types are supported."
+    )
+    .optional(),
+  eventBanner: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpeg, .jpg, and .png file types are supported."
+    )
+    .optional(),
+  certificateTemplate: z
+    .any()
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpeg, .jpg, and .png file types are supported."
+    )
+    .optional(),
+});
+
+export type FormType = z.infer<typeof addingFormSchema>;
+export type OptionalFormType = z.infer<typeof editingFormSchema>;
+
+type EventFormProps = {
+  handleDialogClose: () => void;
+  currentEventName?: string;
+  currentEventDescription?: string;
+  currentEventDate?: Date;
+  id?: string;
+};
 
 export const EventForm = ({
   handleDialogClose,
-}: {
-  handleDialogClose: () => void;
-}) => {
+  currentEventName,
+  currentEventDescription,
+  currentEventDate,
+  id,
+}: EventFormProps) => {
   // Define your form.
+  const currentResolver = id ? editingFormSchema : addingFormSchema;
   const form = useForm<FormType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(currentResolver),
     mode: "onChange",
     defaultValues: {
-      eventName: "",
-      description: "",
+      eventName: currentEventName || "",
+      description: currentEventDescription || "",
+      eventDate: currentEventDate || undefined,
     },
   });
 
@@ -85,7 +152,11 @@ export const EventForm = ({
 
   // Define a submit handler.
   const onSubmit = async (payload: FormType) => {
-    await sendDocumentToFirestore(payload);
+    if (id) {
+      await editDocumentInFirestore({ payload, id });
+    } else {
+      await sendDocumentToFirestore(payload);
+    }
     handleDialogClose();
   };
 
