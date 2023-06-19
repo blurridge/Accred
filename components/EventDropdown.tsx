@@ -57,9 +57,9 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Add an event</DialogTitle>
+                <DialogTitle>Edit {eventData.name}</DialogTitle>
                 <DialogDescription>
-                  Enter all event details here.
+                  Edit the event details you want changed.
                 </DialogDescription>
               </DialogHeader>
               <EventForm
