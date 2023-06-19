@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { db } from "@/firebase/config";
-import { Timestamp, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { RingLoader } from "@/components/RingLoader";
 import Certificate from "@/components/Certificate";

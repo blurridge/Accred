@@ -7,14 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AdminData } from "@/context/AdminContext";
 import { RingLoader } from "@/components/RingLoader";
+import { useAuth } from "@/context/AuthContext";
 import { AdminLoginButton } from "@/components/AdminLoginButton";
 import accredSq from "@/assets/accred_sq.svg";
 import Image from "next/image";
 
 export const LoginCard = () => {
-  const { adminList, loading } = AdminData();
+  const { loading } = useAuth();
   const currentYear = new Date().getFullYear();
   if (loading) {
     return (
@@ -39,7 +39,7 @@ export const LoginCard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <AdminLoginButton adminList={adminList} />
+            <AdminLoginButton />
           </CardContent>
           <CardFooter>
             <p className="m-auto text-center text-gray-500">

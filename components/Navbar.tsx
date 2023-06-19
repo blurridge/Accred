@@ -22,8 +22,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Moon, ChevronDown, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "next-themes";
-import { AdminData } from "@/context/AdminContext";
-import { User } from "firebase/auth";
 
 export const AdminNavbar = () => {
   const { user, logOut } = useAuth();
@@ -99,15 +97,8 @@ export const AdminNavbar = () => {
 };
 
 export const GuestNavbar = () => {
-  const { user, logOut } = useAuth();
-  const { adminList } = AdminData();
+  const { user, logOut, checkIfUserIsAdmin } = useAuth();
   const { theme, setTheme } = useTheme();
-  const checkIfUserIsAdmin = (user: User) => {
-    return (
-      adminList.length !== 0 &&
-      adminList.some((person) => person.email === user.email)
-    );
-  };
   return (
     <nav className="flex bg-white drop-shadow-xl p-5 justify-between dark:bg-[#080E1D]">
       <div className="flex gap-5">

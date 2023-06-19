@@ -2,22 +2,13 @@
 
 import GoogleButton from "react-google-button";
 import { useAuth } from "@/context/AuthContext";
-import { Admin } from "@/context/AdminContext";
-import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export const AdminLoginButton = ({ adminList }: { adminList: Admin[] }) => {
-  const { googleLogin, user, logOut } = useAuth();
+export const AdminLoginButton = () => {
+  const { googleLogin, user, logOut, checkIfUserIsAdmin } = useAuth();
   const [validUser, setValidUser] = useState<boolean>(true);
   const router = useRouter();
-
-  const checkIfUserIsAdmin = (user: User) => {
-    return (
-      adminList.length !== 0 &&
-      adminList.some((person) => person.email === user.email)
-    );
-  };
 
   const handleGoogleLogin = async () => {
     try {
@@ -36,8 +27,6 @@ export const AdminLoginButton = ({ adminList }: { adminList: Admin[] }) => {
         setValidUser(false);
         logOut();
       }
-    } else {
-      logOut();
     }
   }, [user]);
 
