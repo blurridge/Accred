@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { deleteFromFirebase } from "@/utils/deleteFromFirebase";
 import Link from "next/link";
@@ -24,32 +25,36 @@ import { EventForm } from "@/components/EventForm";
 import { useState } from "react";
 
 export const EventDropdown = ({ eventData }: { eventData: Event }) => {
-  const [open, setOpen] = useState(false);
-  const handleDialogClose = () => {
-    setOpen(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const handleEditDialogClose = () => {
+    setEditOpen(false);
+  };
+  const handleDeleteDialogClose = () => {
+    setDeleteOpen(false);
   };
   return (
     <>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <Link href={`/event/${eventData.id}`} legacyBehavior>
-              <a target="_blank">
-                <DropdownMenuItem>View Event Page</DropdownMenuItem>
-              </a>
-            </Link>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <Link href={`/event/${eventData.id}`} legacyBehavior>
+            <a target="_blank">
+              <DropdownMenuItem>View Event Page</DropdownMenuItem>
+            </a>
+          </Link>
+          <Dialog open={editOpen} onOpenChange={setEditOpen}>
             <DialogTrigger asChild>
               <DropdownMenuItem
                 onSelect={(e) => {
                   e.preventDefault();
-                  setOpen(true);
+                  setEditOpen(true);
                 }}
               >
                 Edit
@@ -63,19 +68,49 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
                 </DialogDescription>
               </DialogHeader>
               <EventForm
-                handleDialogClose={handleDialogClose}
+                handleDialogClose={handleEditDialogClose}
                 currentEventName={eventData.name}
                 currentEventDate={eventData.date.toDate()}
                 currentEventDescription={eventData.description}
                 id={eventData.id}
               />
             </DialogContent>
-            <DropdownMenuItem onClick={() => deleteFromFirebase(eventData.id)}>
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </Dialog>
+          </Dialog>
+          <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+            <DialogTrigger asChild>
+              <DropdownMenuItem
+                onSelect={(e) => {
+                  e.preventDefault();
+                  setDeleteOpen(true);
+                }}
+              >
+                Delete
+              </DropdownMenuItem>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>
+                  Are you sure you want to delete {eventData.name}?
+                </DialogTitle>
+                <DialogDescription>
+                  Once deleted, it could no longer be reverted.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    deleteFromFirebase(eventData.id);
+                    handleDeleteDialogClose();
+                  }}
+                >
+                  Delete
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };
