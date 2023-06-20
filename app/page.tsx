@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { GuestNavbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { FeatureCards } from "@/components/FeatureCards";
 import accredLogo from "@/assets/accred_logo.svg";
+import { FeatureCards } from "@/components/FeatureCards";
+import { Footer } from "@/components/Footer";
+import { GuestNavbar } from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {

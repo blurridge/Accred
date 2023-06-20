@@ -1,15 +1,15 @@
 "use client";
 
-import {
-  Page,
-  Image,
-  Text,
-  Document,
-  View,
-  StyleSheet,
-} from "@react-pdf/renderer";
-import { useState, useEffect } from "react";
 import { fetchImageSize } from "@/utils/fetchImageSize";
+import {
+  Document,
+  Image,
+  Page,
+  StyleSheet,
+  Text,
+  View,
+} from "@react-pdf/renderer";
+import { useEffect, useState } from "react";
 
 const Certificate = ({
   certificateTemplate,

@@ -1,4 +1,4 @@
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../firebase/config";
 
 const photoMetadata = {

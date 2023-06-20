@@ -1,17 +1,16 @@
 "use client";
 
-import { useContext, createContext, useEffect, useState } from "react";
+import { db } from "@/firebase/config";
 import {
   GoogleAuthProvider,
+  User,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
-  User,
 } from "firebase/auth";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/config";
-import { db } from "@/firebase/config";
-import { collection, query, onSnapshot } from "firebase/firestore";
-import { ReactNode } from "react";
 
 export type Admin = {
   email: string;

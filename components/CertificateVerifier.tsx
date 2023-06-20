@@ -1,19 +1,18 @@
 "use client";
 
+import Certificate from "@/components/Certificate";
+import { RingLoader } from "@/components/RingLoader";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 import { db } from "@/firebase/config";
+import { PDFViewer } from "@react-pdf/renderer";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import { RingLoader } from "@/components/RingLoader";
-import Certificate from "@/components/Certificate";
-import { PDFViewer } from "@react-pdf/renderer";
 
 type CertificateDataProps = {
   email: string;

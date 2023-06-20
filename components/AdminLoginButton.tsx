@@ -1,9 +1,9 @@
 "use client";
 
-import GoogleButton from "react-google-button";
 import { useAuth } from "@/context/AuthContext";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import GoogleButton from "react-google-button";
 
 export const AdminLoginButton = () => {
   const { googleLogin, user, logOut, checkIfUserIsAdmin } = useAuth();

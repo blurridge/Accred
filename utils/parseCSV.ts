@@ -1,6 +1,6 @@
-import { Guest } from "./uploadToFirestore";
 import Papa, { ParseResult } from "papaparse";
 import { v4 as uuidv4 } from 'uuid';
+import { Guest } from "./uploadToFirestore";
 
 export const parseCSV = (csvFile: any): Promise<Guest[]> => {
   return new Promise((resolve, reject) => {

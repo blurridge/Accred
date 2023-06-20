@@ -1,7 +1,7 @@
 "use client";
 
-import GoogleButton from "react-google-button";
 import { useAuth } from "@/context/AuthContext";
+import GoogleButton from "react-google-button";
 
 export const GuestLoginButton = () => {
   const { googleLogin } = useAuth();

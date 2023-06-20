@@ -1,8 +1,15 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
 
+import accredLogo from "@/assets/accred_logo.svg";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -10,18 +17,10 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import Image from "next/image";
-import accredLogo from "@/assets/accred_logo.svg";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Moon, ChevronDown, Sun } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { ChevronDown, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 
 export const AdminNavbar = () => {
   const { user, logOut } = useAuth();

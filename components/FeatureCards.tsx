@@ -1,12 +1,10 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
-import { Zap, ScrollText, PaintBucket, Linkedin } from "lucide-react";
+import { Linkedin, PaintBucket, ScrollText, Zap } from "lucide-react";
 
 export const FeatureCards = () => {
   return (

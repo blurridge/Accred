@@ -1,11 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -14,18 +10,22 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
-  sendDocumentToFirestore,
   editDocumentInFirestore,
+  sendDocumentToFirestore,
 } from "@/utils/uploadToFirestore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { ButtonRingLoader } from "./RingLoader";
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
@@ -123,7 +123,7 @@ export type OptionalFormType = z.infer<typeof editingFormSchema>;
 
 type EventFormProps = {
   handleDialogClose: () => void;
-  handleDropdownClose: () => void;
+  handleDropdownClose?: () => void;
   currentEventName?: string;
   currentEventDescription?: string;
   currentEventDate?: Date;
@@ -160,7 +160,9 @@ export const EventForm = ({
       await sendDocumentToFirestore(payload);
     }
     handleDialogClose();
-    handleDropdownClose();
+    if (handleDropdownClose !== undefined) {
+      handleDropdownClose();
+    }
   };
 
   const handleGuestList = (event: React.ChangeEvent<HTMLInputElement>) => {

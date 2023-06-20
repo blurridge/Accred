@@ -1,7 +1,7 @@
 "use client";
 
-import AdminGuide from "@/components/AdminGuide.mdx";
 import accredLs from "@/assets/accred_ls.svg";
+import AdminGuide from "@/components/AdminGuide.mdx";
 import Image from "next/image";
 
 const Page = () => {

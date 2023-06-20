@@ -1,7 +1,7 @@
 import { AuthContextProvider } from "@/context/AuthContext";
-import "./globals.css";
-import { Inter } from "next/font/google";
 import { ThemeContext } from "@/context/ThemeContext";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

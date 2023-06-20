@@ -1,10 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { db } from "@/firebase/config";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { Event } from "@/components/ui/columns";
-import { ReactNode } from "react";
+import { db } from "@/firebase/config";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 type EventDataContextType = {
   eventData: Event[];

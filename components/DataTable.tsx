@@ -5,11 +5,15 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  useReactTable,
-  getPaginationRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
 
+import { AddEvent } from "@/components/AddEvent";
+import { RingLoader } from "@/components/RingLoader";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -18,12 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { AddEvent } from "@/components/AddEvent";
-import { useState } from "react";
 import { EventData } from "@/context/EventDataContext";
-import { RingLoader } from "@/components/RingLoader";
+import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

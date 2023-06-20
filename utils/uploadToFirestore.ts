@@ -1,15 +1,15 @@
-import { OptionalFormType, FormType } from "@/components/EventForm";
+import { FormType, OptionalFormType } from "@/components/EventForm";
 import { db } from "@/firebase/config";
+import { compressBanner } from "@/utils/compressBanner";
+import { parseCSV } from "@/utils/parseCSV";
+import { uploadPhoto } from "@/utils/uploadToStorage";
 import {
   Timestamp,
   addDoc,
   collection,
-  updateDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
-import { parseCSV } from "@/utils/parseCSV";
-import { uploadPhoto } from "@/utils/uploadToStorage";
-import { compressBanner } from "@/utils/compressBanner";
 
 export type Guest = {
   name: string;

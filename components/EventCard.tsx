@@ -1,19 +1,18 @@
 "use client";
 
+import { EventCardContent } from "@/components/EventCardContent";
+import { RingLoader } from "@/components/RingLoader";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 import { db } from "@/firebase/config";
 import { FilePayload, InitialPayload } from "@/utils/uploadToFirestore";
 import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { RingLoader } from "@/components/RingLoader";
-import { EventCardContent } from "@/components/EventCardContent";
 
 export type EventCardData = InitialPayload & FilePayload;
 

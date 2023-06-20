@@ -1,11 +1,11 @@
 "use client";
 
-import { AdminNavbar } from "@/components/Navbar";
-import { ReactNode } from "react";
-import { EventDataContextProvider } from "@/context/EventDataContext";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 import { Footer } from "@/components/Footer";
+import { AdminNavbar } from "@/components/Navbar";
+import { useAuth } from "@/context/AuthContext";
+import { EventDataContextProvider } from "@/context/EventDataContext";
+import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();

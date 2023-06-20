@@ -1,6 +1,6 @@
-import { doc, deleteDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import { db, storage } from "../firebase/config";
-import { ref, deleteObject } from "firebase/storage";
 
 export const deleteFromFirebase = async (id: string) => {
   const bannerRef = ref(storage, `${id}-banner.jpg`);

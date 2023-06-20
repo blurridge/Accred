@@ -1,6 +1,6 @@
+import { Footer } from "@/components/Footer";
 import { GuestNavbar } from "@/components/Navbar";
 import { ReactNode } from "react";
-import { Footer } from "@/components/Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (

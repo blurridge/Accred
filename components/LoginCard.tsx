@@ -1,5 +1,8 @@
 "use client";
 
+import accredSq from "@/assets/accred_sq.svg";
+import { AdminLoginButton } from "@/components/AdminLoginButton";
+import { RingLoader } from "@/components/RingLoader";
 import {
   Card,
   CardContent,
@@ -7,10 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { RingLoader } from "@/components/RingLoader";
 import { useAuth } from "@/context/AuthContext";
-import { AdminLoginButton } from "@/components/AdminLoginButton";
-import accredSq from "@/assets/accred_sq.svg";
 import Image from "next/image";
 
 export const LoginCard = () => {

@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +9,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { EventForm } from "./EventForm";
+import { Plus } from "lucide-react";
 import { useState } from "react";
+import { EventForm } from "./EventForm";
 
 export const AddEvent = () => {
   const [open, setOpen] = useState(false);
