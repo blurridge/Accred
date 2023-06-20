@@ -27,15 +27,19 @@ import { useState } from "react";
 export const EventDropdown = ({ eventData }: { eventData: Event }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleEditDialogClose = () => {
     setEditOpen(false);
   };
   const handleDeleteDialogClose = () => {
     setDeleteOpen(false);
   };
+  const handleDropdownClose = () => {
+    setDropdownOpen(false);
+  };
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
@@ -69,6 +73,7 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
               </DialogHeader>
               <EventForm
                 handleDialogClose={handleEditDialogClose}
+                handleDropdownClose={handleDropdownClose}
                 currentEventName={eventData.name}
                 currentEventDate={eventData.date.toDate()}
                 currentEventDescription={eventData.description}
@@ -102,6 +107,7 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
                   onClick={() => {
                     deleteFromFirebase(eventData.id);
                     handleDeleteDialogClose();
+                    handleDropdownClose();
                   }}
                 >
                   Delete

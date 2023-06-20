@@ -123,6 +123,7 @@ export type OptionalFormType = z.infer<typeof editingFormSchema>;
 
 type EventFormProps = {
   handleDialogClose: () => void;
+  handleDropdownClose: () => void;
   currentEventName?: string;
   currentEventDescription?: string;
   currentEventDate?: Date;
@@ -131,6 +132,7 @@ type EventFormProps = {
 
 export const EventForm = ({
   handleDialogClose,
+  handleDropdownClose,
   currentEventName,
   currentEventDescription,
   currentEventDate,
@@ -158,6 +160,7 @@ export const EventForm = ({
       await sendDocumentToFirestore(payload);
     }
     handleDialogClose();
+    handleDropdownClose();
   };
 
   const handleGuestList = (event: React.ChangeEvent<HTMLInputElement>) => {
