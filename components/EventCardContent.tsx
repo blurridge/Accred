@@ -43,19 +43,21 @@ export const EventCardContent = ({
   };
 
   const handleAddToLinkedIn = () => {
-    const timestampMillis = eventDate.toMillis();
-    const date = new Date(timestampMillis);
-    const eventYear = date.getFullYear();
-    const eventMonth = date.getMonth() + 1;
-    const shareURL = generateLinkedInShareURL({
-      orgName: "Google Developer Student Clubs San Carlos",
-      certTitle: eventName,
-      certYear: eventYear,
-      certMonth: eventMonth,
-      certId: certId.current,
-      certURL: `${window.location.href}/certificate/${certId.current}`,
-    });
-    window.open(shareURL, "_blank");
+    if (typeof window !== "undefined") {
+      const timestampMillis = eventDate.toMillis();
+      const date = new Date(timestampMillis);
+      const eventYear = date.getFullYear();
+      const eventMonth = date.getMonth() + 1;
+      const shareURL = generateLinkedInShareURL({
+        orgName: "Google Developer Student Clubs San Carlos",
+        certTitle: eventName,
+        certYear: eventYear,
+        certMonth: eventMonth,
+        certId: certId.current,
+        certURL: `${window.location.href}/certificate/${certId.current}`,
+      });
+      window.open(shareURL, "_blank");
+    }
   };
 
   const userInGuestList = user !== null && checkIfUserInGuestList(user);
