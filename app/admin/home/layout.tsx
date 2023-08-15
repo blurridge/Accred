@@ -5,14 +5,16 @@ import { AdminNavbar } from "@/components/Navbar";
 import { useAuth } from "@/context/AuthContext";
 import { EventDataContextProvider } from "@/context/EventDataContext";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
   const router = useRouter();
-  if (user === null) {
-    router.push("/admin/login");
-  }
+  useEffect(() => {
+    if (user === null) {
+      router.push("/admin/login");
+    }
+  }, [user]);
   return (
     <>
       <div className="h-screen flex flex-col">
