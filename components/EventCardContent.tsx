@@ -75,6 +75,7 @@ export const EventCardContent = ({
                 guestName={user?.displayName || ""}
               />
             }
+            fileName={`${user?.displayName}_certificate` || "certficate"}
           >
             {({ loading }) =>
               loading ? (

@@ -5,11 +5,11 @@ const photoMetadata = {
   contentType: "image/jpeg",
 };
 
-const pdfMetadata = {
-  contentType: "application/pdf",
-};
-
-export const uploadPhoto = (id: string, file: any, fileType: string): Promise<string> => {
+export const uploadPhoto = (
+  id: string,
+  file: any,
+  fileType: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     const storageRef = ref(storage, `${id}-${fileType}.jpg`);
     const uploadTask = uploadBytesResumable(storageRef, file, photoMetadata);
