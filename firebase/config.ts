@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { getAnalytics, isSupported } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -23,6 +24,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
+let analytics;
+if (typeof window !== undefined) {
+  analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : null));
+}
 const provider = new GoogleAuthProvider();
 
-export { auth, db, provider, storage };
+export { analytics, auth, db, provider, storage };
