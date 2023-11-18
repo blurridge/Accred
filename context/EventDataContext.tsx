@@ -32,6 +32,7 @@ export const EventDataContextProvider = ({
         date: doc.data().eventDate,
         description: doc.data().description,
         guests: doc.data().guestList.length,
+        textColor: doc.data().certificateTextColor,
       }));
       setEventData(data);
       setLoading(false);
