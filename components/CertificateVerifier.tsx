@@ -7,7 +7,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { db } from "@/firebase/config";
 import { PDFViewer } from "@react-pdf/renderer";
@@ -19,6 +19,7 @@ type CertificateDataProps = {
   name: string;
   certId: string;
   certificateTemplate: string;
+  certificateTextColor: string;
 };
 
 export const CertificateVerifier = ({
@@ -33,6 +34,7 @@ export const CertificateVerifier = ({
     name: "",
     certId: "",
     certificateTemplate: "",
+    certificateTextColor: "",
   });
   const [loading, setLoading] = useState<boolean>(true);
   const eventName = useRef<string>("");
@@ -51,6 +53,7 @@ export const CertificateVerifier = ({
             year: "numeric",
           }) || "";
         const certificateTemplate = eventDoc.data().certificateTemplate || "";
+        const certificateTextColor = eventDoc.data().certificateTextColor || "";
         const guestList = eventDoc.data().guestList || [];
         // Check if certId exists in guestList
         const matchingCert = guestList.find(
@@ -63,6 +66,7 @@ export const CertificateVerifier = ({
             name,
             certId,
             certificateTemplate,
+            certificateTextColor,
           });
         }
       }
@@ -111,6 +115,7 @@ export const CertificateVerifier = ({
               <Certificate
                 certificateTemplate={certificate.certificateTemplate}
                 guestName={certificate.name}
+                certificateTextColor={certificate.certificateTextColor}
               />
             </PDFViewer>
           </div>

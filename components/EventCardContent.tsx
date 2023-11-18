@@ -16,19 +16,23 @@ export const EventCardContent = ({
   certificateTemplate,
   eventName,
   eventDate,
+  certificateTextColor,
 }: {
   guestList: Guest[];
   certificateTemplate: string;
   eventName: string;
   eventDate: Timestamp;
+  certificateTextColor: string;
 }) => {
   const { logOut, user } = useAuth();
   const certId = useRef<string>("");
+  const guestName = useRef<string>("");
 
   const checkIfUserInGuestList = (user: User) => {
     const foundGuest = guestList.find((person) => person.email === user.email);
     if (foundGuest) {
       certId.current = foundGuest.certId;
+      guestName.current = foundGuest.name;
       return true;
     }
     return false;
@@ -72,7 +76,8 @@ export const EventCardContent = ({
             document={
               <Certificate
                 certificateTemplate={certificateTemplate}
-                guestName={user?.displayName || ""}
+                guestName={guestName.current || ""}
+                certificateTextColor={certificateTextColor}
               />
             }
             fileName={`${user?.displayName}_certificate` || "certficate"}

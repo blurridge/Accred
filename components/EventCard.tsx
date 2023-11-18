@@ -28,6 +28,7 @@ export const EventCard = ({ id }: { id: string }) => {
         guestList: [],
         eventBanner: "",
         certificateTemplate: "",
+        certificateTextColor: "#FFFFFF",
       };
       setLoading(true);
       const docRef = doc(db, "events", id);
@@ -41,6 +42,7 @@ export const EventCard = ({ id }: { id: string }) => {
           guestList: eventDoc.data().guestList || [],
           eventBanner: eventDoc.data().eventBanner || "",
           certificateTemplate: eventDoc.data().certificateTemplate || "",
+          certificateTextColor: eventDoc.data().certificateTextColor || "#FFFFFF",
         };
       }
       setEventCardData(eventData);
@@ -114,6 +116,7 @@ export const EventCard = ({ id }: { id: string }) => {
                         eventCardData?.eventDate ||
                         Timestamp.fromDate(new Date())
                       }
+                      certificateTextColor={eventCardData?.certificateTextColor || "#FFFFFF"}
                     />
                   </CardContent>
                 </Card>
