@@ -10,30 +10,24 @@ import {
   View,
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
-import { fetchDominantColorFromImage } from "@/utils/fetchDominantColorFromImage";
-import { getTextColor } from "@/utils/getTextColor";
 
 const Certificate = ({
   certificateTemplate,
   guestName,
+  certificateTextColor,
 }: {
   certificateTemplate: string;
   guestName: string;
+  certificateTextColor: string;
 }) => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-  const [backgroundColor, setBackgroundColor] = useState({ r: 0, g: 0, b: 0 });
 
   useEffect(() => {
     const getImageSize = async () => {
       const size = await fetchImageSize(certificateTemplate);
       setImageSize(size);
     };
-    const getBackgroundColor = async () => {
-      const color = await fetchDominantColorFromImage(certificateTemplate);
-      setBackgroundColor(color);
-    };
     getImageSize(); // Gets image size of certificate from Firebase URL
-    getBackgroundColor(); // Gets dominant color of the certificate to ensure the text is better as black or white design-wise
   }, [certificateTemplate]);
 
   if (imageSize.width === 0 || imageSize.height === 0) {
@@ -42,11 +36,7 @@ const Certificate = ({
 
   const { width, height } = imageSize;
   const scaleFactor = Math.min(width, height) / 1500; // Adjust this factor as needed
-  const textColor = getTextColor(
-    backgroundColor.r,
-    backgroundColor.g,
-    backgroundColor.b
-  );
+  const textColor = certificateTextColor
 
   const styles = StyleSheet.create({
     page: {

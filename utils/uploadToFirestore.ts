@@ -22,6 +22,7 @@ export type InitialPayload = {
   description: string;
   eventDate: Timestamp;
   guestList?: Guest[];
+  certificateTextColor: string;
 };
 
 export type FilePayload = {
@@ -38,6 +39,7 @@ export const sendDocumentToFirestore = async (payload: FormType) => {
       description: payload.description,
       eventDate: Timestamp.fromDate(payload.eventDate),
       guestList: parsedGuestList,
+      certificateTextColor: payload.certificateTextColor,
     };
     const eventDocRef = await addDoc(collection(db, "events"), initialPayload); // Once payload has been added, proceed to storage file uploads.
     // Compress event banner to ensure fast loading of event page. It is blurred so losing quality is fine.
@@ -81,6 +83,7 @@ export const editDocumentInFirestore = async ({
       eventName: payload.eventName,
       description: payload.description,
       eventDate: Timestamp.fromDate(payload.eventDate),
+      certificateTextColor: payload.certificateTextColor,
     };
 
     if (parsedGuestList !== undefined) {

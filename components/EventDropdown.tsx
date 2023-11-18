@@ -64,7 +64,7 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
                 Edit
               </DropdownMenuItem>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] overflow-y-scroll max-h-[90vh]">
               <DialogHeader>
                 <DialogTitle>Edit {eventData.name}</DialogTitle>
                 <DialogDescription>

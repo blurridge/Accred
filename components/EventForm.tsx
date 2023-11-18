@@ -27,6 +27,8 @@ import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ButtonRingLoader } from "./RingLoader";
+import { HexColorPicker, HexColorInput } from "react-colorful";
+import { useState } from "react";
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const ACCEPTED_GUEST_LIST_TYPES = ["text/csv"];
@@ -71,7 +73,9 @@ const addingFormSchema = z.object({
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .jpeg, .jpg, and .png file types are supported."
     ),
-
+  certificateTextColor: z.string({
+    required_error: "A text color is required.",
+  }),
 });
 
 const editingFormSchema = z.object({
@@ -117,6 +121,9 @@ const editingFormSchema = z.object({
       "Only .jpeg, .jpg, and .png file types are supported."
     )
     .optional(),
+  certificateTextColor: z.string({
+    required_error: "A text color is required.",
+  }),
 });
 
 export type FormType = z.infer<typeof addingFormSchema>;
@@ -148,10 +155,12 @@ export const EventForm = ({
       eventName: currentEventName || "",
       description: currentEventDescription || "",
       eventDate: currentEventDate || undefined,
+      certificateTextColor: "#FFFFFF",
     },
   });
 
   const { formState } = form; // Destructure from form the form state which tells us if form is valid or not.
+  const [color, setColor] = useState("#FFFFF"); // Text color for certificate state.
 
   // Define a submit handler.
   const onSubmit = async (payload: FormType) => {
@@ -190,6 +199,19 @@ export const EventForm = ({
       form.setValue("certificateTemplate", file); // Set the file as the value of certificateTemplate field
       form.trigger("certificateTemplate"); // Manually triggering validation because of custom <Input /> component
     }
+  };
+
+  const handleCertificateTextColor = (newColor: string) => {
+    setColor(newColor);
+    form.setValue("certificateTextColor", newColor);
+    form.trigger("certificateTextColor");
+  };
+
+  const handleInputColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newColor = event.target.value;
+    setColor(newColor);
+    form.setValue("certificateTextColor", newColor);
+    form.trigger("certificateTextColor");
   };
 
   return (
@@ -296,6 +318,34 @@ export const EventForm = ({
               <FormLabel>Certificate Template</FormLabel>
               <FormControl>
                 <Input type="file" onChange={handleCertificateTemplate} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="certificateTextColor"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Certificate Text Color</FormLabel>
+              <FormControl>
+                <HexColorPicker
+                  color={color}
+                  onChange={handleCertificateTextColor}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="certificateTextColor"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input {...field} onChange={handleInputColorChange} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -25,7 +25,7 @@ export const AddEvent = () => {
           <Plus className="mr-2 h-4 w-4" /> Add Event
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] overflow-y-scroll max-h-[90vh]">
         <DialogHeader>
           <DialogTitle>Add an event</DialogTitle>
           <DialogDescription>Enter all event details here.</DialogDescription>
