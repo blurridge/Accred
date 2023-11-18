@@ -77,6 +77,7 @@ export const EventDropdown = ({ eventData }: { eventData: Event }) => {
                 currentEventName={eventData.name}
                 currentEventDate={eventData.date.toDate()}
                 currentEventDescription={eventData.description}
+                currentCertificateTextColor={eventData.textColor}
                 id={eventData.id}
               />
             </DialogContent>

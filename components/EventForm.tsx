@@ -136,6 +136,7 @@ type EventFormProps = {
   currentEventDescription?: string;
   currentEventDate?: Date;
   id?: string;
+  currentCertificateTextColor?: string;
 };
 
 export const EventForm = ({
@@ -144,6 +145,7 @@ export const EventForm = ({
   currentEventName,
   currentEventDescription,
   currentEventDate,
+  currentCertificateTextColor,
   id,
 }: EventFormProps) => {
   // Define your form.
@@ -155,12 +157,16 @@ export const EventForm = ({
       eventName: currentEventName || "",
       description: currentEventDescription || "",
       eventDate: currentEventDate || undefined,
-      certificateTextColor: "#FFFFFF",
+      certificateTextColor: currentCertificateTextColor || "#FFFFFF",
     },
   });
 
   const { formState } = form; // Destructure from form the form state which tells us if form is valid or not.
   const [color, setColor] = useState("#FFFFF"); // Text color for certificate state.
+
+  if (currentCertificateTextColor && color !== currentCertificateTextColor) {
+    setColor(currentCertificateTextColor);
+  }
 
   // Define a submit handler.
   const onSubmit = async (payload: FormType) => {
@@ -207,7 +213,9 @@ export const EventForm = ({
     form.trigger("certificateTextColor");
   };
 
-  const handleInputColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const newColor = event.target.value;
     setColor(newColor);
     form.setValue("certificateTextColor", newColor);

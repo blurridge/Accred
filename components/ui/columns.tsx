@@ -10,6 +10,7 @@ export type Event = {
   date: Timestamp;
   description: string;
   guests: number;
+  textColor: string;
 };
 
 export const columns: ColumnDef<Event>[] = [
