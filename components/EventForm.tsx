@@ -71,6 +71,7 @@ const addingFormSchema = z.object({
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .jpeg, .jpg, and .png file types are supported."
     ),
+
 });
 
 const editingFormSchema = z.object({
