@@ -29,7 +29,9 @@ export const EventCardContent = ({
   const guestName = useRef<string>("");
 
   const checkIfUserInGuestList = (user: User) => {
-    const foundGuest = guestList.find((person) => person.email === user.email);
+    const foundGuest = guestList.find(
+      (person) => person.email.toLowerCase() === user.email?.toLowerCase()
+    );
     if (foundGuest) {
       certId.current = foundGuest.certId;
       guestName.current = foundGuest.name;
