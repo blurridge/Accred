@@ -61,6 +61,11 @@ NEXT_PUBLIC_FIREBASE_APP_ID               = <<your firebase app id here>>
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID       = <<your firebase measurement id here>>
 ```
 
+After setting up Firebase, make sure to create an `admins` collection on Firestore and create a record for each admin you want added. A document should look like this:
+```
+email: example@gmail.com
+```
+
 Start the server
 
 ```bash
